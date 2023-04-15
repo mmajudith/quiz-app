@@ -8,7 +8,7 @@ const Question = ({
 	selectAnswerhandler,
 	nextQuestion,
 	selectedOption,
-	timePerSecond,
+	timeQuestions,
 	setShowResults,
 }) => {
 	const [options, setOptions] = useState([]);
@@ -27,10 +27,10 @@ const Question = ({
 		);
 		setOptions(shuffledOpt);
 
-		const timer = setTimeout(() => setShowResults(true), 1000 * timePerSecond);
+		const timer = setTimeout(() => setShowResults(true), 1000 * timeQuestions);
 
 		return () => clearTimeout(timer);
-	}, [currentQuestion, questionsOption, timePerSecond, setShowResults]);
+	}, [currentQuestion, questionsOption, timeQuestions, setShowResults]);
 
 	return (
 		<div className="w-full h-fit m-auto">
@@ -38,7 +38,7 @@ const Question = ({
 				Question: {currentQuestion + 1} out of {questionsOption?.length}
 			</h2>
 
-			<Timer timePerSecond={timePerSecond} />
+			<Timer timeQuestions={timeQuestions} />
 
 			<div className="w-full mx-auto px-5">
 				<p>{questionsOption[currentQuestion]?.question}</p>

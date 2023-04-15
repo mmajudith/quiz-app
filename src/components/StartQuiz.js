@@ -20,9 +20,8 @@ const StartQuiz = () => {
 	const [point, setPoint] = useState(0);
 	const [count, setCount] = useState(0);
 
-	const timePerSecond =
+	const timeQuestions =
 		quiz.data?.timeLimit === undefined ? 0 : +quiz.data?.timeLimit * 60;
-	console.log(timePerSecond);
 
 	//Options clicked function
 	const selectAnswerhandler = (isCorrect, index) => {
@@ -115,7 +114,7 @@ const StartQuiz = () => {
 									selectAnswerhandler={selectAnswerhandler}
 									nextQuestion={nextQuestion}
 									selectedOption={selectedOption}
-									timePerSecond={timePerSecond}
+									timeQuestions={timeQuestions}
 									setShowResults={setShowResults}
 								/>
 							)}
