@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 
 const ShowResults = ({ count, point, points, questionsOption }) => {
 	return (
-		<div className="w-full h-fit m-auto mt-3 text-lg flex flex-col justify-center items-center gap-2">
+		<div className="w-full h-fit m-auto mt-5 text-lg flex flex-col justify-center items-center gap-2">
 			<h1>Final Results</h1>
 			<p>
 				{count} out of {questionsOption.length}

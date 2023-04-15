@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import Timer from './Timer';
 
 const Question = ({
 	questionsOption,
@@ -7,6 +8,8 @@ const Question = ({
 	selectAnswerhandler,
 	nextQuestion,
 	selectedOption,
+	timePerSecond,
+	setShowResults,
 }) => {
 	const [options, setOptions] = useState([]);
 
@@ -22,15 +25,21 @@ const Question = ({
 		const shuffledOpt = shuffleOptions(
 			questionsOption[currentQuestion]?.options
 		);
-
 		setOptions(shuffledOpt);
-	}, [currentQuestion, questionsOption]);
+
+		const timer = setTimeout(() => setShowResults(true), 1000 * timePerSecond);
+
+		return () => clearTimeout(timer);
+	}, [currentQuestion, questionsOption, timePerSecond, setShowResults]);
 
 	return (
 		<div className="w-full h-fit m-auto">
 			<h2 className="text-dark-blue text-lg text-center">
 				Question: {currentQuestion + 1} out of {questionsOption?.length}
 			</h2>
+
+			<Timer timePerSecond={timePerSecond} />
+
 			<div className="w-full mx-auto px-5">
 				<p>{questionsOption[currentQuestion]?.question}</p>
 				<ul className="w-full h-fit mt-5 flex flex-col justify-start gap-2">
@@ -50,10 +59,11 @@ const Question = ({
 						))}
 				</ul>
 			</div>
+
 			<div className="w-full mx-auto mt-5 flex flex-col justify-end items-end ">
 				<button
 					disabled={isDisable ? false : true}
-					onClick={nextQuestion}
+					onClick={(e) => nextQuestion(e)}
 					className={`w-[100px] h-[40px] mr-5 rounded-md flex flex-col justify-center items-center text-white font-medium ${
 						isDisable
 							? `bg-dark-blue cursor-pointer hover:opacity-60`

@@ -63,7 +63,7 @@ const Quiz = () => {
 												<p>
 													Time Limit:{' '}
 													<span className="text-grayish-blue font-normal ml-1">
-														{quiz.timeLimit}
+														{quiz.timeLimit} minutes
 													</span>
 												</p>
 											</div>

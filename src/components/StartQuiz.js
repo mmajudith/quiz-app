@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../firebase';
 import { Link, useParams } from 'react-router-dom';
-import Timer from './Timer';
 import ShowResults from './ShowResults';
 import Question from './Question';
 
@@ -20,6 +19,10 @@ const StartQuiz = () => {
 	const [isDisable, setIsDisable] = useState(false);
 	const [point, setPoint] = useState(0);
 	const [count, setCount] = useState(0);
+
+	const timePerSecond =
+		quiz.data?.timeLimit === undefined ? 0 : +quiz.data?.timeLimit * 60;
+	console.log(timePerSecond);
 
 	//Options clicked function
 	const selectAnswerhandler = (isCorrect, index) => {
@@ -46,6 +49,7 @@ const StartQuiz = () => {
 		setCorrectAns(false);
 		setIsDisable(false);
 	};
+
 	useEffect(() => {
 		const getSingleQuiz = async () => {
 			const docRef = doc(db, 'quiz', quizID);
@@ -95,7 +99,6 @@ const StartQuiz = () => {
 						<h1 className="text-dark-blue font-semibold text-xl">
 							{quiz.data?.name} Quiz
 						</h1>
-
 						<div className="w-full h-auto mx-auto">
 							{showResults ? (
 								<ShowResults
@@ -112,6 +115,8 @@ const StartQuiz = () => {
 									selectAnswerhandler={selectAnswerhandler}
 									nextQuestion={nextQuestion}
 									selectedOption={selectedOption}
+									timePerSecond={timePerSecond}
+									setShowResults={setShowResults}
 								/>
 							)}
 						</div>

@@ -92,7 +92,7 @@ const CreateQuiz = () => {
 					<TextInput
 						id={'timeLimit'}
 						type={'number'}
-						placeholder={'Time limit'}
+						placeholder={'Enter time limit in minutes'}
 						onChangeHandler={onChangeHandler}
 					/>
 
