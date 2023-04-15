@@ -128,7 +128,7 @@ const EditQuiz = ({ id, quiz }) => {
 					))
 				) : (
 					<p className="w-11/12 h-fit mx-auto text-dark-blue text-center font-medium text-lg">
-						No quetions and options added...
+						No questions and options added...
 					</p>
 				)}
 				<div className="w-full h-fit mx-auto mt-7 flex flex-row justify-between items-center">

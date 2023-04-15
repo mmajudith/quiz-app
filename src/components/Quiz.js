@@ -6,7 +6,7 @@ import {
 	toggleAddQuestion,
 } from '../reduxtoolkit/features/quizReducer';
 import EditQuiz from './EditQuiz';
-import DeleteQuiz from './DeleteQuiz';
+import DeleteQuesOptions from './DeleteQuesOptions';
 import AddQuestionOption from './AddQuestionOption';
 
 const Quiz = () => {
@@ -85,7 +85,7 @@ const Quiz = () => {
 													}}
 													className="w-fit h-fit px-3 py-1 bg-dark-blue text-white cursor-pointer hover:opacity-60 rounded-md text-center"
 												>
-													Delete
+													Delete question & options
 												</p>
 												<p
 													onClick={() => {
@@ -93,13 +93,17 @@ const Quiz = () => {
 													}}
 													className="w-fit h-fit px-3 py-1 bg-dark-blue text-white cursor-pointer hover:opacity-60 rounded-md text-center"
 												>
-													Add question & option
+													Add question & options
 												</p>
 											</div>
 										</div>
 										{quiz.isEditing && <EditQuiz id={quiz.id} quiz={quiz} />}
 										{quiz.isDelete && (
-											<DeleteQuiz id={quiz.id} name={quiz.name} />
+											<DeleteQuesOptions
+												id={quiz.id}
+												name={quiz.name}
+												quesOptions={quiz.quesOptions}
+											/>
 										)}
 										{quiz.isAddQuestion && (
 											<AddQuestionOption id={quiz.id} name={quiz.name} />
