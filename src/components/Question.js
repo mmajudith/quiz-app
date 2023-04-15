@@ -8,10 +8,10 @@ const Question = ({
 	selectAnswerhandler,
 	nextQuestion,
 	selectedOption,
-	timeQuestions,
-	setShowResults,
+	timePerQuestion,
 }) => {
 	const [options, setOptions] = useState([]);
+	const [refresh, setRefresh] = useState(1);
 
 	const shuffleOptions = (options) => {
 		for (let i = options.length - 1; i > 0; i--) {
@@ -21,16 +21,27 @@ const Question = ({
 		return options;
 	};
 
+	//Refresh timer component
+	const refreshHandler = () => {
+		setRefresh(Math.random());
+	};
+
 	useEffect(() => {
 		const shuffledOpt = shuffleOptions(
 			questionsOption[currentQuestion]?.options
 		);
 		setOptions(shuffledOpt);
 
-		const timer = setTimeout(() => setShowResults(true), 1000 * timeQuestions);
+		const timer = setTimeout(() => nextQuestion(), 1000 * timePerQuestion);
 
 		return () => clearTimeout(timer);
-	}, [currentQuestion, questionsOption, timeQuestions, setShowResults]);
+	}, [currentQuestion, questionsOption, timePerQuestion, nextQuestion]);
+
+	useEffect(() => {
+		if (currentQuestion < questionsOption.length) {
+			refreshHandler();
+		}
+	}, [currentQuestion, questionsOption]);
 
 	return (
 		<div className="w-full h-fit m-auto">
@@ -38,7 +49,7 @@ const Question = ({
 				Question: {currentQuestion + 1} out of {questionsOption?.length}
 			</h2>
 
-			<Timer timeQuestions={timeQuestions} />
+			<Timer key={refresh} timePerQuestion={timePerQuestion} />
 
 			<div className="w-full mx-auto px-5">
 				<p>{questionsOption[currentQuestion]?.question}</p>
